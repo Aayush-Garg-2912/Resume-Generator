@@ -4,14 +4,25 @@ const path = require('path');
 const generatePDF = async (resumeId, token) => {
     // We assume the frontend is running on localhost:5173 for development
     // In production, this should point to the deployed frontend URL
-    const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
+    let frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
+    // Remove trailing slash if it exists
+    if (frontendUrl.endsWith('/')) {
+        frontendUrl = frontendUrl.slice(0, -1);
+    }
     const resumeUrl = `${frontendUrl}/preview/${resumeId}`;
 
     console.log(`Generating PDF from ${resumeUrl}`);
 
     const browser = await puppeteer.launch({
         headless: 'new',
-        args: ['--no-sandbox', '--disable-setuid-sandbox']
+        args: [
+            '--no-sandbox', 
+            '--disable-setuid-sandbox',
+            '--disable-dev-shm-usage',
+            '--disable-gpu',
+            '--single-process',
+            '--no-zygote'
+        ]
     });
 
     const page = await browser.newPage();

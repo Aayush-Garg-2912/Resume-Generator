@@ -62,8 +62,10 @@ const Dashboard = () => {
         }
       });
       
-      if (!res.ok) throw new Error('Failed to download PDF');
-      
+      if (!res.ok) {
+        throw new Error('Failed to generate PDF from server');
+      }
+
       const blob = await res.blob();
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
@@ -71,11 +73,12 @@ const Dashboard = () => {
       a.download = `resume-${id}.pdf`;
       document.body.appendChild(a);
       a.click();
-      window.URL.revokeObjectURL(url);
-      document.body.removeChild(a);
+      a.remove();
     } catch (error) {
-      console.error('Error downloading PDF', error);
-      alert('Failed to download PDF. Please try again.');
+      console.error('Error downloading PDF from server, falling back to browser print:', error);
+      // Fallback: Open the preview page and let the user print it using the browser
+      alert("Server PDF generation failed. Opening preview for you to save as PDF via browser print (Ctrl+P / Cmd+P).");
+      window.open(`/preview/${id}?print=true`, '_blank');
     }
   };
 

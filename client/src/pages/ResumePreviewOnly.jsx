@@ -11,17 +11,29 @@ const ResumePreviewOnly = () => {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    const initialize = async () => {
+    const fetchResume = async () => {
       try {
         await loadResume(id);
       } catch (err) {
-        setError('Failed to load resume');
+        setError(err.message);
       } finally {
         setLoading(false);
       }
     };
-    if (id) initialize();
+    if (id) fetchResume();
   }, [id]);
+
+  // Auto-print if query parameter is present
+  useEffect(() => {
+    if (currentResume && !loading) {
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('print') === 'true') {
+        setTimeout(() => {
+          window.print();
+        }, 1000); // give it a second to render images etc
+      }
+    }
+  }, [currentResume, loading]);
 
   if (loading || !currentResume) {
     return (
