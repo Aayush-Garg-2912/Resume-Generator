@@ -51,35 +51,10 @@ const Dashboard = () => {
     navigate('/editor');
   };
 
-  const handleDownload = async (id) => {
-    try {
-      // Need to use the raw token since we need blob response
-      const token = JSON.parse(localStorage.getItem('user')).token;
-      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
-      const res = await fetch(`${API_URL}/resumes/${id}/pdf`, {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      });
-      
-      if (!res.ok) {
-        throw new Error('Failed to generate PDF from server');
-      }
-
-      const blob = await res.blob();
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `resume-${id}.pdf`;
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-    } catch (error) {
-      console.error('Error downloading PDF from server, falling back to browser print:', error);
-      // Fallback: Open the preview page and let the user print it using the browser
-      alert("Server PDF generation failed. Opening preview for you to save as PDF via browser print (Ctrl+P / Cmd+P).");
-      window.open(`/preview/${id}?print=true`, '_blank');
-    }
+  const handleDownload = (id) => {
+    // We open the print-optimized preview in a new tab. 
+    // This uses the browser's native print-to-PDF which is highly reliable and ATS-friendly.
+    window.open(`/preview/${id}?print=true`, '_blank');
   };
 
   return (
