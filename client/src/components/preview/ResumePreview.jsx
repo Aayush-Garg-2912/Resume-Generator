@@ -7,14 +7,14 @@ const ResumePreview = () => {
   const hasSkills = Object.values(skills || {}).some(arr => arr && arr.length > 0);
 
   return (
-    <div className="resume-preview bg-white w-full max-w-[210mm] aspect-[1/1.414] p-8 sm:p-12 text-black text-[11px] font-serif relative leading-snug">
+    <div className="resume-preview bg-white w-full max-w-[210mm] aspect-[1/1.414] p-8 sm:p-12 text-black text-[14px] font-serif relative leading-snug">
       {/* HEADER */}
       <header className="text-center mb-4">
-        <h1 className="text-2xl font-bold uppercase tracking-wider mb-1">
+        <h1 className="text-3xl font-bold uppercase tracking-wider mb-1">
           {personalInfo?.fullName || 'YOUR FULL NAME'}
         </h1>
         
-        <div className="flex flex-wrap justify-center items-center gap-1 text-[10px] text-gray-800">
+        <div className="flex flex-wrap justify-center items-center gap-1 text-[13px] text-gray-800">
           {personalInfo?.phone && <span>{personalInfo.phone}</span>}
           {personalInfo?.phone && personalInfo?.email && <span className="mx-1">|</span>}
           {personalInfo?.email && <span>{personalInfo.email}</span>}
@@ -38,8 +38,8 @@ const ResumePreview = () => {
       {/* SUMMARY */}
       {personalInfo?.summary && (
         <section className="mb-4">
-          <h3 className="font-bold text-[11px] uppercase tracking-wider mb-2 border border-black inline-block px-1">Professional Summary</h3>
-          <p className="text-[10px] text-justify leading-relaxed whitespace-pre-line">
+          <h3 className="font-bold text-[14px] uppercase tracking-wider mb-2 border border-black inline-block px-1">Professional Summary</h3>
+          <p className="text-[13px] text-justify leading-relaxed whitespace-pre-line">
             {personalInfo.summary}
           </p>
         </section>
@@ -48,8 +48,8 @@ const ResumePreview = () => {
       {/* EDUCATION */}
       {education && education.length > 0 && (
         <section className="mb-4">
-          <h3 className="font-bold text-[11px] uppercase tracking-wider mb-2 border border-black inline-block px-1">Education</h3>
-          <table className="w-full border-collapse border border-black text-[10px]">
+          <h3 className="font-bold text-[14px] uppercase tracking-wider mb-2 border border-black inline-block px-1">Education</h3>
+          <table className="w-full border-collapse border border-black text-[13px]">
             <tbody>
               {education.map((edu, idx) => (
                 <tr key={idx} className="border border-black">
@@ -69,8 +69,8 @@ const ResumePreview = () => {
       {/* TECHNICAL SKILLS */}
       {hasSkills && (
         <section className="mb-4">
-          <h3 className="font-bold text-[11px] uppercase tracking-wider mb-1 border border-black inline-block px-1">Technical Skills</h3>
-          <div className="text-[10px] space-y-0.5">
+          <h3 className="font-bold text-[14px] uppercase tracking-wider mb-1 border border-black inline-block px-1">Technical Skills</h3>
+          <div className="text-[13px] space-y-0.5">
             {skills.languages?.length > 0 && (
               <p><span className="font-bold">Languages:</span> {skills.languages.join(', ')}</p>
             )}
@@ -96,20 +96,20 @@ const ResumePreview = () => {
       {/* EXPERIENCE */}
       {experience && experience.length > 0 && (
         <section className="mb-4">
-          <h3 className="font-bold text-[11px] uppercase tracking-wider mb-2 border border-black inline-block px-1">Experience</h3>
+          <h3 className="font-bold text-[14px] uppercase tracking-wider mb-2 border border-black inline-block px-1">Experience</h3>
           <div className="space-y-3">
             {experience.map((exp, idx) => (
               <div key={idx}>
                 <div className="flex justify-between items-start mb-1">
-                  <p className="font-bold text-[11px]">
+                  <p className="font-bold text-[14px]">
                     {exp.role} — {exp.company}
                   </p>
-                  <p className="text-[10px] font-bold">
+                  <p className="text-[13px] font-bold">
                     ({exp.startDate} - {exp.currentWorking ? 'Present' : exp.endDate})
                   </p>
                 </div>
                 {exp.description && (
-                  <ul className="list-disc pl-5 text-[10px] space-y-0.5 text-justify">
+                  <ul className="list-disc pl-5 text-[13px] space-y-0.5 text-justify">
                     {exp.description.split('\n').filter(line => line.trim() !== '').map((line, i) => {
                       let cleanLine = line.trim();
                       if (cleanLine.startsWith('-') || cleanLine.startsWith('•')) {
@@ -128,32 +128,32 @@ const ResumePreview = () => {
       {/* PROJECTS */}
       {projects && projects.length > 0 && (
         <section className="mb-4">
-          <h3 className="font-bold text-[11px] uppercase tracking-wider mb-2 border border-black inline-block px-1">Projects</h3>
+          <h3 className="font-bold text-[14px] uppercase tracking-wider mb-2 border border-black inline-block px-1">Projects</h3>
           <div className="space-y-3">
             {projects.map((proj, idx) => (
               <div key={idx}>
                 <div className="mb-0.5 flex items-center gap-1">
-                  <p className="font-bold text-[11px] inline">
+                  <p className="font-bold text-[14px] inline">
                     {proj.projectName}
                   </p>
                   {proj.githubLink && (
-                    <a href={proj.githubLink.startsWith('http') ? proj.githubLink : `https://${proj.githubLink}`} target="_blank" rel="noreferrer" className="text-blue-600 underline text-[10px] ml-1">
+                    <a href={proj.githubLink.startsWith('http') ? proj.githubLink : `https://${proj.githubLink}`} target="_blank" rel="noreferrer" className="text-blue-600 underline text-[13px] ml-1">
                       GitHub
                     </a>
                   )}
                   {proj.liveDemo && (
-                    <a href={proj.liveDemo.startsWith('http') ? proj.liveDemo : `https://${proj.liveDemo}`} target="_blank" rel="noreferrer" className="text-blue-600 underline text-[10px] ml-1">
+                    <a href={proj.liveDemo.startsWith('http') ? proj.liveDemo : `https://${proj.liveDemo}`} target="_blank" rel="noreferrer" className="text-blue-600 underline text-[13px] ml-1">
                       Live
                     </a>
                   )}
                 </div>
                 {proj.techStack?.length > 0 && (
-                  <p className="text-[10px] italic mb-1 text-gray-700">
+                  <p className="text-[13px] italic mb-1 text-gray-700">
                     Stack: {proj.techStack.join(' - ')}
                   </p>
                 )}
                 {proj.description && (
-                  <ul className="list-disc pl-5 text-[10px] space-y-0.5 text-justify">
+                  <ul className="list-disc pl-5 text-[13px] space-y-0.5 text-justify">
                     {proj.description.split('\n').filter(line => line.trim() !== '').map((line, i) => {
                       let cleanLine = line.trim();
                       if (cleanLine.startsWith('-') || cleanLine.startsWith('•')) {
@@ -172,8 +172,8 @@ const ResumePreview = () => {
       {/* CERTIFICATIONS */}
       {certifications && certifications.length > 0 && (
         <section className="mb-4">
-          <h3 className="font-bold text-[11px] uppercase tracking-wider mb-2 border border-black inline-block px-1">Certifications</h3>
-          <ul className="list-disc pl-5 text-[10px] space-y-0.5">
+          <h3 className="font-bold text-[14px] uppercase tracking-wider mb-2 border border-black inline-block px-1">Certifications</h3>
+          <ul className="list-disc pl-5 text-[13px] space-y-0.5">
             {certifications.map((cert, idx) => (
               <li key={idx}>
                 <span className="font-bold">{cert.certificateName}</span> {cert.organization ? `— ${cert.organization}` : ''}
@@ -186,8 +186,8 @@ const ResumePreview = () => {
       {/* ACHIEVEMENTS */}
       {achievements && achievements.length > 0 && (
         <section className="mb-4">
-          <h3 className="font-bold text-[11px] uppercase tracking-wider mb-2 border border-black inline-block px-1">Achievements</h3>
-          <ul className="list-disc pl-5 text-[10px] space-y-0.5">
+          <h3 className="font-bold text-[14px] uppercase tracking-wider mb-2 border border-black inline-block px-1">Achievements</h3>
+          <ul className="list-disc pl-5 text-[13px] space-y-0.5">
             {achievements.map((ach, idx) => (
               <li key={idx}>
                 {ach.title && <span className="font-bold">{ach.title} — </span>}
@@ -201,8 +201,8 @@ const ResumePreview = () => {
       {/* POSITIONS OF RESPONSIBILITY */}
       {extraActivities?.positionsOfResponsibility?.filter(p => p.trim()).length > 0 && (
         <section className="mb-4">
-          <h3 className="font-bold text-[11px] uppercase tracking-wider mb-2 border border-black inline-block px-1">Positions of Responsibility</h3>
-          <ul className="list-disc pl-5 text-[10px] space-y-0.5">
+          <h3 className="font-bold text-[14px] uppercase tracking-wider mb-2 border border-black inline-block px-1">Positions of Responsibility</h3>
+          <ul className="list-disc pl-5 text-[13px] space-y-0.5">
             {extraActivities.positionsOfResponsibility.filter(pos => pos.trim()).map((pos, idx) => (
               <li key={idx}>{pos}</li>
             ))}
@@ -213,8 +213,8 @@ const ResumePreview = () => {
       {/* EXTRA-CURRICULAR ACTIVITIES */}
       {extraActivities?.extraCurricular?.filter(e => e.trim()).length > 0 && (
         <section className="mb-4">
-          <h3 className="font-bold text-[11px] uppercase tracking-wider mb-2 border border-black inline-block px-1">Extra-Curricular Activities</h3>
-          <ul className="list-disc pl-5 text-[10px] space-y-0.5">
+          <h3 className="font-bold text-[14px] uppercase tracking-wider mb-2 border border-black inline-block px-1">Extra-Curricular Activities</h3>
+          <ul className="list-disc pl-5 text-[13px] space-y-0.5">
             {extraActivities.extraCurricular.filter(ext => ext.trim()).map((ext, idx) => (
               <li key={idx}>{ext}</li>
             ))}
@@ -226,3 +226,4 @@ const ResumePreview = () => {
 };
 
 export default ResumePreview;
+
